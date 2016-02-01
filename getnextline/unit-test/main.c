@@ -13,6 +13,7 @@
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <fcntl.h>
 
 char				*get_next_line(int const fd);
@@ -61,7 +62,7 @@ int				main(int argc, char **argv)
 	{
 		if (argc == 3)
 		{
-			if (fake_line = get_next_line(42)  == NULL)
+		  if ((fake_line = get_next_line(42))  == NULL)
 				printf("done testing fake fd\n");
 			else
 				printf("ERROR: did not pass fake fd test\n");
