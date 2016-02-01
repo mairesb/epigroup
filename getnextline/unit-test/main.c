@@ -18,7 +18,7 @@
 
 char				*get_next_line(int const fd);
 
-#define TF_DEBUG		0
+#define TF_DEBUG		1
 
 void			test(char *filename)
 {
