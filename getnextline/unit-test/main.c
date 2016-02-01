@@ -33,13 +33,11 @@ void			test(char *filename)
 	}
 	fd = open(filename, O_RDONLY);
 	outfd = open("this_out.txt", O_WRONLY | O_TRUNC);
-	line = NULL;
-	while ((line = get_next_line(fd)) == NULL)
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (TF_DEBUG) printf("returned = \t|%s|\n", line);
 		dprintf(outfd, "%s\n", line);
 		free(line);
-		line = NULL;
 	}
 	if (TF_DEBUG) printf("last = \t\t|%s|\n", line);
 	if (line)
@@ -48,7 +46,7 @@ void			test(char *filename)
 		free(line);
 	}
 	line = get_next_line(fd);
-	if (line == NULL) printf("repeated calls failing\n");
+	if (line != NULL) printf("repeated calls failing\n");
 	close(outfd);
 	close(fd);
 	if (TF_DEBUG) printf("=================================================\n");
