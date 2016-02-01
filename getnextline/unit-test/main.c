@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int				get_next_line(int const fd, char **line);
+char				*get_next_line(int const fd);
 
 #define TF_DEBUG		0
 
@@ -24,7 +24,6 @@ void			test(char *filename)
 	int		fd;
 	int		outfd;
 	char	*line;
-	int		returned;
 
 	if (TF_DEBUG)
 	{
@@ -34,7 +33,7 @@ void			test(char *filename)
 	fd = open(filename, O_RDONLY);
 	outfd = open("this_out.txt", O_WRONLY | O_TRUNC);
 	line = NULL;
-	while ((returned = get_next_line(fd, &line)) == 1)
+	while ((line = get_next_line(fd)) == NULL)
 	{
 		if (TF_DEBUG) printf("returned = \t|%s|\n", line);
 		dprintf(outfd, "%s\n", line);
@@ -47,9 +46,8 @@ void			test(char *filename)
 		dprintf(outfd, "%s", line);
 		free(line);
 	}
-	if (returned != 0) printf("ERROR: Did not return 0 at the end\n");
-	returned = get_next_line(fd, &line);
-	if (returned != 0) printf("repeated calls failing\n");
+	line = get_next_line(fd);
+	if (line == NULL) printf("repeated calls failing\n");
 	close(outfd);
 	close(fd);
 	if (TF_DEBUG) printf("=================================================\n");
@@ -63,7 +61,7 @@ int				main(int argc, char **argv)
 	{
 		if (argc == 3)
 		{
-			if (get_next_line(42, &fake_line)  == -1)
+			if (fake_line = get_next_line(42)  == NULL)
 				printf("done testing fake fd\n");
 			else
 				printf("ERROR: did not pass fake fd test\n");
