@@ -39,14 +39,6 @@ void			test(char *filename)
 		dprintf(outfd, "%s\n", line);
 		free(line);
 	}
-	if (TF_DEBUG) printf("last = \t\t|%s|\n", line);
-	if (line)
-	{
-		dprintf(outfd, "%s", line);
-		free(line);
-	}
-	line = get_next_line(fd);
-	if (line != NULL) printf("repeated calls failing\n");
 	close(outfd);
 	close(fd);
 	if (TF_DEBUG) printf("=================================================\n");
