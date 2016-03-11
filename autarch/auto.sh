@@ -1,7 +1,7 @@
-size_boot = "500M"
-size_swap = "500M"
-size_sys = "5G"
-size_home = "3G"
+size_boot="500M"
+size_swap="500M"
+size_sys="5G"
+size_home="3G"
 
 echo "Attention veuillez faire Attention a ce que votre disque pour arch soit bien sda et non sdb ou sdc ("$>lsblk")"
 read
