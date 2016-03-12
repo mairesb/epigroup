@@ -7,6 +7,7 @@ read -p "Attention veuillez faire Attention a ce que votre disque pour arch soit
 echo "o\nn\np\n\n\n+$size_sys\nn\np\n\n\n+$size_boot\nn\np\n\n\n+$size_swap\nn\np\n\n\n+$size_home\nw\n" > part
 fdisk /dev/sda < part
 rm part
+sleep 1
 mkswap /dev/sda2
 mkfs.ext4 /dev/sda1
 mkfs.ext4 /dev/sda3
